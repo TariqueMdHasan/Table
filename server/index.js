@@ -1,12 +1,14 @@
 const express = require("express")
 const mongoose = require("mongoose")
+const cors = require("cors")
+
 const connectionDB = require("./configs/db.js")
-const dotenv = require('dotenv')
-// const bodyParser = require('body-parser')
 const tableData = require('./routes/table.routes.js')
 
 
 const app = express()
+
+app.use(cors())
 
 
 dotenv.config();
