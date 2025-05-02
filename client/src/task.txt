@@ -1,0 +1,33 @@
+responsive:
+tailwind CSS: for now normal CSS
+ShadCN: html table 
+
+Avatar: 
+Name:
+Description:
+Amount:
+CheckBoxes:
+Delete:
+At bottom: clear all CheckBox
+
+Horizontally scrollable:
+Draggable (column):
+Resizable (colWidth):
+Sticky (first col): 
+sorting: 
+
+Add button to export view as .xlsx:
+clean ui:
+desktop layout should be pixel-perfect:
+
+Backend (nodejs): 
+
+## saving to the backend
+column Order:
+CheckBox selection:
+
+## Submission Expectation
+Frontend Code:
+Backend api:
+README.md with seup instruction:
+Deployed link:

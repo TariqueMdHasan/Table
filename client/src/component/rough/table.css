@@ -1,0 +1,44 @@
+.tableContainer{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+.th, td, .th-chbox{
+    border: 1px solid black;
+    margin: 0;
+    padding: 8px;
+    background: white;
+    white-space: no-wrap;
+}
+.th{
+    cursor: grabbing;
+
+    position: relative;
+}
+tr{
+    gap: 0;
+}
+table{
+    border-collapse: collapse;
+    table-layout: auto;
+    width: auto;
+}
+.res-div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.columnResizer {
+    width: 5px;
+    cursor: col-resize;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 10;
+    background-color: rgba(0, 0, 255, 0.3);
+}
+  

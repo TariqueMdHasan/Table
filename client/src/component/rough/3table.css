@@ -1,0 +1,56 @@
+.tableContainer{
+    max-width: 600px;
+    overflow-x: auto;
+    border: 1px solid red;
+    position: relative;
+}
+
+td, th{
+    border: 1px solid black;
+    background: white;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+.th{
+    cursor: grab;
+}
+.check-rl-pad{
+    /* margin-left: 13px;
+    margin-right: 13px; */
+    width: 45px;
+}
+.th, .td-pad-lr, .delete{
+    padding-left: 13px;
+    padding-right: 13px;
+}
+table{
+    border-collapse: collapse;
+    width: max-content;
+}
+.arrow{
+    z-index: 2;
+    cursor: pointer;
+}
+.delete{
+    cursor: pointer;
+}
+.t-widthning{
+    background-color: black;
+}
+.column_resize_table th::before {
+    content: ''; 
+    display: block;
+    width: var(--column_resize_before_width);
+}
+.toBeSticked1{
+    position: sticky;
+    z-index: 2;
+    left: 0;
+}
+.toBeSticked2{
+    position: sticky;
+    z-index: 2;
+    left: 46px;
+}
+
+

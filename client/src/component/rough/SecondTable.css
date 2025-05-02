@@ -1,0 +1,18 @@
+td, th{
+    border: 1px solid black;
+    background: white;
+    padding: 8px 13px;
+}
+.th{
+    cursor: grab;
+}
+table{
+    border-collapse: collapse;
+}
+.arrow{
+    z-index: 2;
+    cursor: pointer;
+}
+.delete{
+    cursor: pointer;
+}
