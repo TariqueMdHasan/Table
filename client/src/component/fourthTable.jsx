@@ -14,7 +14,7 @@ const tableHeader = [
   { id: "th-5", label: "delete", className: "th" },
 ];
 
-const FourthTable = ({ page, setTotalData, limit }) => {
+const FourthTable = ({ page, setTotalData, limit, setJsonData, clearAll }) => {
   const [checkData, setCheckData] = useState([]);
   const [dragIndex, setDragIndex] = useState(null);
   const [headerItem, setHeaderItem] = useState(tableHeader);
@@ -29,7 +29,7 @@ const FourthTable = ({ page, setTotalData, limit }) => {
           `https://table-2jki.onrender.com/api/table/data?limit=${limit}&page=${pageNum}`
         );
         setCheckData(result.data.data);
-        console.log(result.data.data);
+        setJsonData(result.data.data)
         setTotalData(result.data.totalData);
       } catch (error) {
         console.error("Failed to fetch data", error);
@@ -39,7 +39,7 @@ const FourthTable = ({ page, setTotalData, limit }) => {
     };
 
     fetchData(page);
-  }, [page, limit, setTotalData]);
+  }, [page, limit, setTotalData, setJsonData]);
 
   //   1. check function: Done
   const handleCheckboxChange = (index) => {
@@ -52,9 +52,33 @@ const FourthTable = ({ page, setTotalData, limit }) => {
     const newCheck = checkData.map((item) => ({
       ...item,
       check: !allChecked,
+      // allChecked: false,
+      // check: allChecked
     }));
     setCheckData(newCheck);
   };
+
+  const HandleAllUcheck = () => {
+    const allUnChecked = checkData.map((item) => ({
+      ...item,
+      check: false
+    }));
+    // const newCheck = checkData.map((item) => ({
+    //   ...item,
+    //   allChecked: false,
+    //   check: allChecked
+    // }));
+    setCheckData(allUnChecked);
+  }
+
+  useEffect(() => {
+    if(clearAll){
+      clearAll(()=> HandleAllUcheck)
+    }
+  })
+
+
+
 
   //   2. Delete function: Done
   const handleDelete = async(id) => {
@@ -134,6 +158,7 @@ const FourthTable = ({ page, setTotalData, limit }) => {
                 type="checkbox"
                 className="check-rl-pad"
                 onChange={handleAllCheckChange}
+                checked={checkData.length > 0 && checkData.every((item) => item.check)}
               />
             </th>
 

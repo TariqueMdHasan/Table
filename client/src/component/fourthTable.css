@@ -1,13 +1,13 @@
 .tableContainer{
     max-width: 60%;
     overflow-x: auto;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     position: relative;
     height: auto;
 }
 
 
-td{
+td, th{
     border: 1px solid black;
     background: white;
     /* padding-top: 8px;
@@ -24,6 +24,7 @@ td{
     /* margin-left: 13px;
     margin-right: 13px; */
     width: 45px;
+    border: 1px solid black;
 }
 .th, .td-pad-lr, .delete{
     padding-left: 13px;
@@ -32,6 +33,7 @@ td{
 table{
     border-collapse: collapse;
     width: max-content;
+    background-color: white;
 }
 .arrow{
     z-index: 2;
@@ -52,6 +54,7 @@ table{
     position: sticky;
     z-index: 2;
     left: 0;
+    border: 1px solid black;
 }
 .toBeSticked2{
     position: sticky;
