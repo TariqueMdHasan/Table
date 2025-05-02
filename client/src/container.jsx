@@ -9,7 +9,8 @@ import FourthTable from "./component/fourthTable";
 import { useNavigate } from "react-router-dom";
 // import FifthTable from './component/fifthTable'
 import { FaDownload } from "react-icons/fa";
-import { exportToExcel } from 'react-json-to-excel';
+// import { exportToExcel } from 'react-json-to-excel';
+import { exportToExcel } from './component/utils/fileSaver';
 
 function Container() {
   const navigate = useNavigate();
@@ -33,6 +34,13 @@ function Container() {
   const handlePrev = () => {
     if (page < lastPage) setPage((prev) => prev - 1);
   };
+
+
+  const handleExport = () => {
+    exportToExcel({ data: jsonData, fileName: 'my-data.xlsx' });
+  };
+
+
 
   return (
     <div className="container">
@@ -72,7 +80,8 @@ function Container() {
         </label>
         <button
           className="nextBtn"
-          onClick={()=> exportToExcel(jsonData, 'DataTable')}
+          // onClick={()=> exportToExcel(jsonData, 'DataTable')}
+          onClick={handleExport}
         >
           Download <FaDownload />
         </button>
