@@ -142,7 +142,7 @@ function Form() {
           <fieldset>
             <legend>Choose Avatar</legend>
             {avatars.map((item, index) => (
-              <label key={index}>
+              <div key={index}>
                 <input
                   type="radio"
                   name="avatar"
@@ -151,7 +151,7 @@ function Form() {
                   onChange={handleChange}
                 />
                 <img src={item} alt={`avatar${index}`} className="FormImages" />
-              </label>
+              </div>
             ))}
           </fieldset>
           {error ? <p className="paraTable">{errorMessage}</p> : ""}

@@ -27,7 +27,7 @@ function Container() {
     if (page < lastPage) setPage((prev) => prev + 1);
   };
   const handlePrev = () => {
-    if (page < lastPage) setPage((prev) => prev - 1);
+    if (page > 1) setPage((prev) => prev - 1);
   };
 
   const handleExport = () => {
