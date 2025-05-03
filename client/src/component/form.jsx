@@ -142,7 +142,7 @@ function Form() {
           <fieldset>
             <legend>Choose Avatar</legend>
             {avatars.map((item, index) => (
-              <label key={index}>
+              <label key={index} className="fieldsetLabel">
                 <input
                   type="radio"
                   name="avatar"

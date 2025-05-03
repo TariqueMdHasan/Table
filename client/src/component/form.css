@@ -32,9 +32,14 @@ fieldset{
     align-items: center;
     flex-wrap: wrap;
 }
+.fieldsetLabel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .FormImages{
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     object-fit: cover;
     margin: 5px;
     border-radius: 50%;
