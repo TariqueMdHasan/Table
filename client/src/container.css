@@ -36,8 +36,16 @@
   /* background-color: red; */
   display: flex;
   justify-content: space-between;
+  /* justify-content: right; */
+  /* gap: 2rem; */
   align-items: center;
   margin-bottom: 1rem;
+}
+.preNextdownloadCheckBtnLeft, .preNextdownloadCheckBtnRight{
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  /* align-items: center; */
 }
 .limitAddDataContainer label select{
   height: 2rem;
@@ -54,11 +62,47 @@
 .limitAddDataContainer label{
   font-size: 13px;
 }
+.pageInfo{
+  display: flex;
+  gap: 1rem;
+}
+button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
 
 
 @media only screen and (max-width: 600px){
   .limitAddDataContainer, .buttonNextPrevContainer{
       width: 90vw;
       /* background-color: red; */
+  }
+  .tableControl{
+    display: none;
+  }
+  .preNextdownloadCheckBtnLeft{
+    flex-direction: column-reverse;
+  }
+  .preNextdownloadCheckBtnRight{
+    flex-direction: column;
+  }
+  .pageInfo{
+    display: flex;
+    flex-direction: column;
+  }
+  .middleParaPageInfo{
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 600px){
+  .limitAddDataContainer{
+      justify-content: center;
+      gap: 2rem;
+  }
+  .preNextdownloadCheckBtnRight, .preNextdownloadCheckBtnLeft{
+    align-items: center;
   }
 }

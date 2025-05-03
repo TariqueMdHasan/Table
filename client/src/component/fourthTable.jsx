@@ -29,8 +29,9 @@ const FourthTable = ({ page, setTotalData, limit, setJsonData, clearAll }) => {
           `https://table-2jki.onrender.com/api/table/data?limit=${limit}&page=${pageNum}`
         );
         setCheckData(result.data.data);
-        setJsonData(result.data.data)
+        setJsonData(result.data.data);
         setTotalData(result.data.totalData);
+        // console.log(result.data.totalData)
       } catch (error) {
         console.error("Failed to fetch data", error);
       } finally {
@@ -61,7 +62,7 @@ const FourthTable = ({ page, setTotalData, limit, setJsonData, clearAll }) => {
   const HandleAllUcheck = () => {
     const allUnChecked = checkData.map((item) => ({
       ...item,
-      check: false
+      check: false,
     }));
     // const newCheck = checkData.map((item) => ({
     //   ...item,
@@ -69,25 +70,24 @@ const FourthTable = ({ page, setTotalData, limit, setJsonData, clearAll }) => {
     //   check: allChecked
     // }));
     setCheckData(allUnChecked);
-  }
+  };
 
   useEffect(() => {
-    if(clearAll){
-      clearAll(()=> HandleAllUcheck)
+    if (clearAll) {
+      clearAll(() => HandleAllUcheck);
     }
-  })
-
-
-
+  }, [clearAll]);
 
   //   2. Delete function: Done
-  const handleDelete = async(id) => {
+  const handleDelete = async (id) => {
     // const newArr = [...checkData];
     // newArr.splice(index, 1);
     // setCheckData(newArr);
     // https://table-2jki.onrender.com/api/table/data/68101297adf59f69a2756920
-    try{
-      await axios.delete(`https://table-2jki.onrender.com/api/table/data/${id}`)
+    try {
+      await axios.delete(
+        `https://table-2jki.onrender.com/api/table/data/${id}`
+      );
       // setCheckData(newArr)
       // toast.success('task deleted sucessfully 1111')
 
@@ -97,13 +97,10 @@ const FourthTable = ({ page, setTotalData, limit, setJsonData, clearAll }) => {
       setCheckData(result.data.data);
       setTotalData(result.data.totalData);
 
-
-
-      toast.success('task deleted sucessfully 2222')
-      
-    }catch(error){
-      console.error('not delete! try again later', error)
-      toast.error('task not able to delete')
+      toast.success("task deleted sucessfully");
+    } catch (error) {
+      console.error("not delete! try again later", error);
+      toast.error("task not able to delete");
     }
   };
 
@@ -150,49 +147,55 @@ const FourthTable = ({ page, setTotalData, limit, setJsonData, clearAll }) => {
 
   return (
     <div className="tableContainer">
-      <table className="column_resize_table">
-        <thead>
-          <tr>
-            <th className="toBeSticked1">
-              <input
-                type="checkbox"
-                className="check-rl-pad"
-                onChange={handleAllCheckChange}
-                checked={checkData.length > 0 && checkData.every((item) => item.check)}
-              />
-            </th>
-
-            {headerItem.map((column, index) => (
-              <React.Fragment key={index}>
-                <th
-                  className={index === 0 ? "toBeSticked2 th" : "th"}
-                  key={index}
-                  draggable
-                  id={column.id}
-                  onDragStart={() => handleDragStart(index)}
-                  onDragOver={handleDragOver}
-                  onDrop={() => handleDrop(index)}
-                >
-                  {column.label === "amount" ? (
-                    <>
-                      Amount
-                      <LuArrowUpDown className="arrow" onClick={handleAmount} />
-                    </>
-                  ) : (
-                    column.label
-                  )}
-                </th>
-                <ColumnResizer
-                  className="columnResizer t-widthning"
-                  minWidth={0}
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <table className="column_resize_table">
+          <thead>
+            <tr>
+              <th className="toBeSticked1">
+                <input
+                  type="checkbox"
+                  className="check-rl-pad"
+                  onChange={handleAllCheckChange}
+                  checked={
+                    checkData.length > 0 &&
+                    checkData.every((item) => item.check)
+                  }
                 />
-              </React.Fragment>
-            ))}
-          </tr>
-        </thead>
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
+              </th>
+
+              {headerItem.map((column, index) => (
+                <React.Fragment key={index}>
+                  <th
+                    className={index === 0 ? "toBeSticked2 th" : "th"}
+                    key={index}
+                    draggable
+                    id={column.id}
+                    onDragStart={() => handleDragStart(index)}
+                    onDragOver={handleDragOver}
+                    onDrop={() => handleDrop(index)}
+                  >
+                    {column.label === "amount" ? (
+                      <>
+                        Amount
+                        <LuArrowUpDown
+                          className="arrow"
+                          onClick={handleAmount}
+                        />
+                      </>
+                    ) : (
+                      column.label
+                    )}
+                  </th>
+                  <ColumnResizer
+                    className="columnResizer t-widthning"
+                    minWidth={0}
+                  />
+                </React.Fragment>
+              ))}
+            </tr>
+          </thead>
           <tbody>
             {checkData.map((row, index) => (
               <tr key={index}>
@@ -210,7 +213,7 @@ const FourthTable = ({ page, setTotalData, limit, setJsonData, clearAll }) => {
                       <td key={column.id}>
                         <MdDelete
                           // onClick={() => handleDelete(index)}
-                          onClick={()=> handleDelete(row._id)}
+                          onClick={() => handleDelete(row._id)}
                           className="delete"
                         />
                       </td>
@@ -220,7 +223,7 @@ const FourthTable = ({ page, setTotalData, limit, setJsonData, clearAll }) => {
                       />
                     </React.Fragment>
                   ) : (
-                    <React.Fragment key={index}>
+                    <React.Fragment key={`${row._id}-${column.id}`}>
                       <td
                         key={column.id}
                         className={`td-pad-lr ${
@@ -228,16 +231,15 @@ const FourthTable = ({ page, setTotalData, limit, setJsonData, clearAll }) => {
                         }`}
                       >
                         {/* {row[column.label]} */}
-                        {
-                          column.label === "avatar" ? (
-                            <img
-                              src={row[column.label]}
-                              alt="avatar"
-                              className="avatar-img"
-                            />
-                          ): 
-                          (row[column.label])
-                        }
+                        {column.label === "avatar" ? (
+                          <img
+                            src={row[column.label]}
+                            alt="avatar"
+                            className="avatar-img"
+                          />
+                        ) : (
+                          row[column.label]
+                        )}
                       </td>
                       <ColumnResizer
                         className="columnResizer t-widthning"
@@ -249,8 +251,8 @@ const FourthTable = ({ page, setTotalData, limit, setJsonData, clearAll }) => {
               </tr>
             ))}
           </tbody>
-        )}
-      </table>
+        </table>
+      )}
     </div>
   );
 };
