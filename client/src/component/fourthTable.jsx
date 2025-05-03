@@ -14,7 +14,7 @@ const tableHeader = [
   { id: "th-5", label: "delete", className: "th" },
 ];
 
-const FourthTable = ({ page, setTotalData, limit, setJsonData, clearAll }) => {
+const FourthTable = ({ page, setTotalData, limit, setJsonData }) => {
   const [checkData, setCheckData] = useState([]);
   const [dragIndex, setDragIndex] = useState(null);
   const [headerItem, setHeaderItem] = useState(tableHeader);
@@ -28,10 +28,11 @@ const FourthTable = ({ page, setTotalData, limit, setJsonData, clearAll }) => {
         const result = await axios.get(
           `https://table-2jki.onrender.com/api/table/data?limit=${limit}&page=${pageNum}`
         );
+
         setCheckData(result.data.data);
         setJsonData(result.data.data);
         setTotalData(result.data.totalData);
-        // console.log(result.data.totalData)
+        // console.log(result.data)
       } catch (error) {
         console.error("Failed to fetch data", error);
       } finally {
@@ -42,54 +43,93 @@ const FourthTable = ({ page, setTotalData, limit, setJsonData, clearAll }) => {
     fetchData(page);
   }, [page, limit, setTotalData, setJsonData]);
 
+  
+
   //   1. check function: Done
-  const handleCheckboxChange = (index) => {
-    const newArr = [...checkData];
-    newArr[index].check = !newArr[index].check;
-    setCheckData(newArr);
-  };
-  const handleAllCheckChange = () => {
-    const allChecked = checkData.every((item) => item.check);
-    const newCheck = checkData.map((item) => ({
-      ...item,
-      check: !allChecked,
-      // allChecked: false,
-      // check: allChecked
-    }));
-    setCheckData(newCheck);
-  };
+  const handleCheckboxChange = async(id) => {
+    const dataById = checkData.find(item => item._id === id)
+    if(!dataById) return toast.error("data not found")
+    // console.log(dataById)
+    try{
+      await axios.patch(`https://table-2jki.onrender.com/api/table/data/${id}`,
+        {checkbox : !dataById.checkbox}
+      )
+      // console.log(result.data)
 
-  const HandleAllUcheck = () => {
-    const allUnChecked = checkData.map((item) => ({
-      ...item,
-      check: false,
-    }));
-    // const newCheck = checkData.map((item) => ({
-    //   ...item,
-    //   allChecked: false,
-    //   check: allChecked
-    // }));
-    setCheckData(allUnChecked);
-  };
+      if(dataById.checkbox){
+        toast.success("task unchecked successfully")
+      }else{
+        toast.success("task checked successfully")
+      }
+      
 
-  useEffect(() => {
-    if (clearAll) {
-      clearAll(() => HandleAllUcheck);
+      setCheckData(prev => 
+        prev.map(item => 
+          item._id === id ? {...item, checkbox: !item.checkbox } : item
+        )
+      )
+
+    }catch(error){
+      console.error("not able to check, try again later", error)
+      toast.error("not able to check, try again later")
     }
-  }, [clearAll]);
 
-  //   2. Delete function: Done
+  };
+
+
+
+
+  
+  
+
+    // 2. Delete function: Done
+  
+  
+  const handleAllCheckChange = async () => {
+    const allChecked = checkData.every(item => item.checkbox);
+    const updatedCheck = !allChecked;
+  
+    try {
+      await Promise.all(
+        checkData.map(item =>
+          axios.patch(
+            `https://table-2jki.onrender.com/api/table/data/${item._id}`,
+            { checkbox: updatedCheck }
+          )
+        )
+      );
+  
+      const updated = checkData.map(item => ({
+        ...item,
+        checkbox: updatedCheck,
+      }));
+      setCheckData(updated);
+  
+      toast.success(updatedCheck ? "All checked" : "All unchecked");
+    } catch (err) {
+      console.error("Error updating checkboxes", err);
+      toast.error("Failed to update checkboxes");
+    }
+  };
+
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   const handleDelete = async (id) => {
-    // const newArr = [...checkData];
-    // newArr.splice(index, 1);
-    // setCheckData(newArr);
-    // https://table-2jki.onrender.com/api/table/data/68101297adf59f69a2756920
     try {
       await axios.delete(
         `https://table-2jki.onrender.com/api/table/data/${id}`
       );
-      // setCheckData(newArr)
-      // toast.success('task deleted sucessfully 1111')
 
       const result = await axios.get(
         `https://table-2jki.onrender.com/api/table/data?limit=${limit}&page=${page}`
@@ -160,7 +200,7 @@ const FourthTable = ({ page, setTotalData, limit, setJsonData, clearAll }) => {
                   onChange={handleAllCheckChange}
                   checked={
                     checkData.length > 0 &&
-                    checkData.every((item) => item.check)
+                    checkData.every((item) => item.checkbox)
                   }
                 />
               </th>
@@ -202,8 +242,8 @@ const FourthTable = ({ page, setTotalData, limit, setJsonData, clearAll }) => {
                 <td className="toBeSticked1">
                   <input
                     type="checkbox"
-                    checked={row.check}
-                    onChange={() => handleCheckboxChange(index)}
+                    checked={row.checkbox}
+                    onChange={() => handleCheckboxChange(row._id)}
                     className="check-rl-pad"
                   />
                 </td>

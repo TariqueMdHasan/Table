@@ -65,23 +65,9 @@ function Container() {
         clearAll={setHandleAllUcheck}
       />
 
-      {/* <div className="buttonNextPrevContainer"> */}
-        {/* <label htmlFor="clearAll">
-          <input 
-            type="checkbox" 
-            id="clearAll"
-            onChange={() => handleAllUncheck()}
-          />
-          Clear All
-        </label> */}
+     
 
-        {/* <button
-          className="nextBtn"
-          onClick={handleExport}
-        >
-          Download <FaDownload />
-        </button> */}
-      {/* </div> */}
+       
 
       <div className="buttonNextPrevContainer">
         <div className="preNextdownloadCheckBtnLeft">
@@ -97,10 +83,14 @@ function Container() {
             <input
               type="checkbox"
               id="clearAll"
-              onChange={() => handleAllUncheck()}
+              // onChange={() => handleAllUncheck && handleAllUncheck()}
+              onChange={handleAllUncheck}
             />
             Clear All
           </label>
+          {/* <button id="clearAll" className="nextBtn" onClick={handleAllUncheck}>
+            clear All
+          </button> */}
         </div>
         <div className="pageInfo">
           <p>
