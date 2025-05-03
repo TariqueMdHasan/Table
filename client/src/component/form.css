@@ -26,10 +26,11 @@
     background-color: red;
 } */
 fieldset{
-    width: 300px;
-    display: wrap;
+    width: 250px;
+    display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
 .FormImages{
     height: 50px;
