@@ -1,11 +1,12 @@
 import { useState } from "react";
 import "./container.css";
-import FourthTable from "./component/fourthTable";
+// import FourthTable from "./component/fourthTable";
 import { useNavigate } from "react-router-dom";
 import { FaDownload } from "react-icons/fa";
 import { exportToExcel } from "./component/utils/fileSaver";
 import { GiNextButton } from "react-icons/gi";
 import { GiPreviousButton } from "react-icons/gi";
+import FinalTable from "./component/finalTable";
 
 function Container() {
   const navigate = useNavigate();
@@ -57,14 +58,21 @@ function Container() {
         </button>
       </div>
 
-      <FourthTable
+      {/* <FourthTable
+        page={page}
+        setTotalData={setTotalData}
+        limit={limit}
+        setJsonData={setJsonData}
+        clearAll={setHandleAllUcheck}
+      /> */}
+
+      <FinalTable
         page={page}
         setTotalData={setTotalData}
         limit={limit}
         setJsonData={setJsonData}
         clearAll={setHandleAllUcheck}
       />
-
      
 
        

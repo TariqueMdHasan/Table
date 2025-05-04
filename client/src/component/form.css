@@ -26,7 +26,7 @@
     background-color: red;
 } */
 fieldset{
-    width: 250px;
+    width: 240px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,11 +66,15 @@ form h1{
     font-size: 13px;
     /* margin-top: 10px; */
 }
-form .submitBtn{
+.formBtns{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 1rem;
+}
+form div .submitBtn{
     padding: 5px 15px;
-    margin-top: 10px;
-    display: block;
-    margin-left: auto;
     color: white;
     background: radial-gradient(circle at center, #23dcec, #579bea);
     transition: all 0.3s ease-in-out;
@@ -78,7 +82,7 @@ form .submitBtn{
     border: none;
     border-radius: 5px;
 }
-form .submitBtn:hover{
+form div .submitBtn:hover{
     background: radial-gradient(circle at center, #51f2ca, #6ac0f2);
 }
 fieldset{
@@ -88,15 +92,15 @@ fieldset{
 }
 .cancel{
     padding: 5px 15px;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     color: white;
     background-color: rgb(210, 30, 30);
     cursor: pointer;
     border: none;
     border-radius: 5px;
-    position: absolute;
+    /* position: absolute;
     left: 1rem;
-    bottom: 1rem;
+    bottom: 1rem; */
 }
 .cancel:hover{
     background-color: red;
@@ -107,3 +111,40 @@ fieldset{
     color: red;
 }
 
+@media only screen and (max-width: 600px){
+    .formContainer {
+        width: 100%;
+        height: 100%;
+    }
+    form {
+        position: relative;
+        width: 90%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+    .inputClass {
+        display: block;
+        margin-bottom: 20px;
+        height: 40px;
+        font-size: 25px;
+    }
+    .inputlabel {
+        font-size: 25px;
+    }
+    form h1 {
+        font-size: 40px;
+        align-self: center;
+    }
+    fieldset{
+        align-self: center;
+    }
+    form div button{
+        font-size: 25px;
+    }
+    form fieldset legend{
+        font-size: 25px;
+    }
+  }

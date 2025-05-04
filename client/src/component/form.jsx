@@ -154,14 +154,18 @@ function Form() {
               </label>
             ))}
           </fieldset>
-          {error ? <p className="paraTable">{errorMessage}</p> : ""}
-          <button type="submit" className="submitBtn">
-            {loading ? "Loading..." : "Submit"}
-          </button>
+          
+          <div className="formBtns">
+            {error ? <p className="paraTable">{errorMessage}</p> : ""}
+            <button type="submit" className="submitBtn">
+              {loading ? "Loading..." : "Submit"}
+            </button>
+            <button className="cancel" onClick={() => navigate("/")}>
+              Cancel
+            </button>
+          </div>
         </form>
-        <button className="cancel" onClick={() => navigate("/")}>
-          Cancel
-        </button>
+        
       </div>
     </div>
   );
