@@ -122,29 +122,30 @@ fieldset{
         height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        /* justify-content: center; */
         align-items: flex-start;
     }
     .inputClass {
         display: block;
         margin-bottom: 20px;
-        height: 40px;
-        font-size: 25px;
+        height: 30px;
+        font-size: 16px;
     }
     .inputlabel {
-        font-size: 25px;
+        font-size: 16px;
     }
     form h1 {
-        font-size: 40px;
+        font-size: 30px;
         align-self: center;
+        margin-top: 10%;
     }
     fieldset{
         align-self: center;
     }
     form div button{
-        font-size: 25px;
+        font-size: 16px;
     }
     form fieldset legend{
-        font-size: 25px;
+        font-size: 16px;
     }
   }
