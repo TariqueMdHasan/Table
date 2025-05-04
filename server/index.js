@@ -6,6 +6,7 @@ const connectionDB = require("./configs/db.js")
 
 
 const tableData = require('./routes/table.routes.js')
+const columnConfig = require('./routes/tableConfig.routes.js')
 
 
 const app = express()
@@ -21,6 +22,7 @@ app.use(cors())
 const PORT = process.env.PORT || 8000;
 
 app.use('/api/table', tableData)
+app.use('/api/column', columnConfig)
 
 app.get("/", (req, res)=> {
     res.send("hello jii")
